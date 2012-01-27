@@ -1,0 +1,11 @@
+Desenvolvimento de uma aplicação usando o Frameworks Struts 1.3
+
+Persistência - Hibernate
+Servidor - Tomcat
+Banco de Dados - Mysql
+
+Funcionalidades:
+Cadastro de Produtos
+Cadastro de Vendedores
+Cadastro de Orçamentos
+Relatório de Orçamentos por Vendedor.
