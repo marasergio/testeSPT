@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+
+
+<!-- ================================================ Form Bean Definitions -->
+
+    <form-beans>
+    
+        <form-bean name="vendedorForm"
+            type="br.com.spt.mara.form.VendedorForm"/>
+            
+        <form-bean name="produtoForm"
+         	type="br.com.spt.mara.form.ProdutoForm"/>
+         	
+        <form-bean name="orcamentoForm"
+        	type="br.com.spt.mara.form.OrcamentoForm"/>
+    
+    </form-beans>
+
+
+<!-- ========================================= Global Exception Definitions -->
+
+    <global-exceptions>
+        <!-- sample exception handler
+        <exception
+            key="expired.password"
+            type="app.ExpiredPasswordException"
+            path="/changePassword.jsp"/>
+        end sample -->
+    </global-exceptions>
+
+
+<!-- =========================================== Global Forward Definitions -->
+
+    <global-forwards>
+        <!-- Default forward to "Welcome" action -->
+        <!-- Demonstrates using index.jsp to forward -->
+        <forward
+            name="welcome"
+            path="/index.jsp"/>
+            
+       <forward name="falha" path="/pages/falha.jsp"/>
+    </global-forwards>
+
+
+<!-- =========================================== Action Mapping Definitions -->
+
+    <action-mappings>
+            <!-- Default "Welcome" action -->
+            <!-- Forwards to Welcome.jsp -->
+            
+        <action path="/home"
+        		type="br.com.spt.mara.action.SucessoAction">
+        	<forward name="sucesso" path="/index.jsp"/>
+        </action>
+        
+        <action path="/produtos"
+                type="br.com.spt.mara.action.ListProdutosAction">
+            <forward name="sucesso" path="/pages/listProduto.jsp"/>
+        </action>
+        
+        <action path="/novoProduto"
+        		type="br.com.spt.mara.action.SucessoAction">
+        	<forward name="sucesso" path="/pages/editProduto.jsp"/>
+        </action>
+        
+        <action path="/salvarProduto"
+                type="br.com.spt.mara.action.ProdutoAction"
+                name="produtoForm"
+                scope="request"
+                input="/editProduto.jsp"
+                validate="true">
+           <forward name="sucesso" path="/pages/produto.jsp"/>
+        </action>
+        
+         <action path="/removeProduto"
+                type="br.com.spt.mara.action.ProdutoAction"
+                name="produtoForm"
+                scope="request"
+                input="/listProduto.jsp">
+           <forward name="sucesso" path="/pages/listProduto.jsp"/>
+        </action>
+        
+        <action path="/editarProduto"
+                type="br.com.spt.mara.action.ProdutoAction"
+                name="produtoForm"
+                scope="request"
+                input="/listProduto.jsp">
+           <forward name="sucesso" path="/pages/editProduto.jsp"/>
+        </action>
+        
+        <action path="/vendedores"
+                type="br.com.spt.mara.action.ListVendedorAction">
+            <forward name="sucesso" path="/pages/listVendedor.jsp"/>
+        </action>        
+        
+        <action path="/novoVendedor"
+                type="br.com.spt.mara.action.SucessoAction">
+            <forward name="sucesso" path="/pages/editVendedor.jsp"/>
+        </action>
+                    
+         <action path="/salvarVendedor"
+                type="br.com.spt.mara.action.VendedorAction"
+                name="vendedorForm"
+                scope="request"
+                input="/editVendedor.jsp">
+            <forward name="sucesso" path="/pages/vendedor.jsp"/>
+        </action>
+        
+        <action path="/editarVendedor"
+                type="br.com.spt.mara.action.VendedorAction"
+                name="vendedorForm"
+                scope="request"
+                input="/listVendedor.jsp">
+           <forward name="sucesso" path="/pages/editVendedor.jsp"/>
+       </action>
+       
+       <action path="/orcamentos"
+        		type="br.com.spt.mara.action.ListOrcamentosAction">
+        	<forward name="sucesso" path="/pages/listOrcamentos.jsp"/>
+        </action>
+        
+        <action path="/abrirOrcamento"
+        		name="orcamentoForm"
+        		input="/listOrcamentos.jsp"
+        		scope="request"
+        		type="br.com.spt.mara.action.ListOrcamentosAction">
+        	<forward name="ok" path="/pages/orcamento.jsp"/>
+        </action>
+        
+         <action path="/relatorio"
+        		type="br.com.spt.mara.action.RelatorioOrcamentoAction">
+        	<forward name="sucesso" path="/pages/relatorioOrcamento.jsp"/>
+        </action>
+       
+       <action path="/novoOrcamento"
+        		type="br.com.spt.mara.action.PreparaOrcamentoAction">
+        	<forward name="sucesso" path="/pages/newOrcamento.jsp"/>
+        </action>
+
+
+       <action path="/adicionarItem"
+       			name="orcamentoForm"
+       			input="/newOrcamento.jsp"
+       			scope="request"
+        		type="br.com.spt.mara.action.OrcamentoAction">
+        	<forward name="sucesso" path="/pages/newOrcamento.jsp"/>
+        	<forward name="gravado" path="/pages/orcamento.jsp"/>
+        </action>
+    <!-- sample input and input submit actions
+
+        <action
+            path="/Input"
+            type="org.apache.struts.actions.ForwardAction"
+            parameter="/pages/Input.jsp"/>
+
+        <action
+            path="/InputSubmit"
+            type="app.InputAction"
+            name="inputForm"
+            scope="request"
+            validate="true"
+            input="/pages/Input.jsp"/>
+
+            <action
+                path="/edit*"
+                type="app.Edit{1}Action"
+                name="inputForm"
+                scope="request"
+                validate="true"
+                input="/pages/Edit{1}.jsp"/>
+
+    end samples -->
+    </action-mappings>
+
+
+<!-- ======================================== Message Resources Definitions -->
+
+    <message-resources parameter="MessageResources" />
+
+
+<!-- =============================================== Plug Ins Configuration -->
+
+  <!-- ======================================================= Tiles plugin -->
+  <!--
+     This plugin initialize Tiles definition factory. This later can takes some
+	 parameters explained here after. The plugin first read parameters from
+	 web.xml, thenoverload them with parameters defined here. All parameters
+	 are optional.
+     The plugin should be declared in each struts-config file.
+       - definitions-config: (optional)
+            Specify configuration file names. There can be several comma
+		    separated file names (default: ?? )
+       - moduleAware: (optional - struts1.1)
+            Specify if the Tiles definition factory is module aware. If true
+            (default), there will be one factory for each Struts module.
+			If false, there will be one common factory for all module. In this
+            later case, it is still needed to declare one plugin per module.
+            The factory will be initialized with parameters found in the first
+            initialized plugin (generally the one associated with the default
+            module).
+			  true : One factory per module. (default)
+			  false : one single shared factory for all modules
+	   - definitions-parser-validate: (optional)
+	        Specify if xml parser should validate the Tiles configuration file.
+			  true : validate. DTD should be specified in file header (default)
+			  false : no validation
+
+	  Paths found in Tiles definitions are relative to the main context.
+
+      To use this plugin, download and add the Tiles jar to your WEB-INF/lib
+      directory then uncomment the plugin definition below.
+
+    <plug-in className="org.apache.struts.tiles.TilesPlugin" >
+
+      <set-property property="definitions-config"
+                       value="/WEB-INF/tiles-defs.xml" />
+      <set-property property="moduleAware" value="true" />
+    </plug-in>
+  -->  
+
+
+  <!-- =================================================== Validator plugin -->
+
+  <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+    <set-property
+        property="pathnames"
+        value="/org/apache/struts/validator/validator-rules.xml,
+               /WEB-INF/validation.xml"/>
+  </plug-in>
+
+</struts-config>
+

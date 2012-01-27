@@ -1,0 +1,54 @@
+@CHARSET "ISO-8859-1";
+
+body{
+	font-family: calibri;
+}
+
+h1{
+	color: #339900;
+}
+
+a{
+	color: #999;
+	text-decoration: none;
+	text-width: bold;
+}
+a:hover{
+	color: #339900;
+	text-decoration: underline;
+}
+
+tr{
+	margin-bottom: 10px;
+}
+th{
+	color: #339900;
+}
+
+.id{
+	width: 50px;
+	text-align: center;
+}
+
+.nome{
+	width: 200px;
+	text-align: left;
+}
+
+.valor{
+	width: 70px;
+	text-align: left;
+}
+
+.quantidade{
+	text-align: center;
+}
+
+#orcamentos th{
+	text-align:left;
+	padding-right: 20px;
+}
+
+#orcamentos .cliente{
+	
+}
